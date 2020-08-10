@@ -1,0 +1,152 @@
+#page-landing {
+    background: var(--color-primary);
+
+}
+
+#page-landing #container {
+    color: var(--color-text-in-primary);
+}
+
+.logo-container img {       /* pegando a div que tem a classe logo-container */
+    height: 10rem;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 3.2rem;
+}
+
+.logo-container h2 {
+    font-weight: 500;
+    font-size: 3.6rem;
+    line-height: 4.6rem;    /* altura da linha do texto */
+    margin-top: 0.8rem;
+}
+
+.hero-image {
+    width: 100%;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin: 3.2rem 0;
+}
+
+.buttons-container a {
+    width: 30rem;
+    height: 10.4rem;
+
+    border-radius: .8rem;
+    margin-right: 1.6rem;
+
+    font: 700 2.4rem Archivo;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    transition: background 0.2s;
+
+    color: var(--color-button-text);
+
+    /*Desafio: border-radius: 100% 0rem 0rem 0rem;*/
+}
+
+.buttons-container a img {
+    width: 4rem;
+    margin-right: 2.4rem;
+}
+
+.buttons-container a.study {
+    background: var(--color-primary-lighter);
+    color: var(--color-secondary);
+}
+
+.buttons-container a.study:hover {
+    background: var(--color-primary-light);
+}
+
+.buttons-container a.give-classes {
+    background:  var(--color-secondary);
+    margin-right: 0;
+}
+
+.buttons-container a.give-classes:hover {
+    background: var(--color-secondary-dark);
+}
+
+.total-connections {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;    /*alinha no meio da tela*/
+}
+
+.total-connections img {
+    width: 1rem;
+    margin-left: 0.8rem;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+@media (max-width: 1100px) {   /* a largura da tela sendo até 1100px então aplique isso no root */
+    :root {
+        font-size: 40%;     /* modificando as medidas rem */
+                            /* isso vai ser mt legal para o dispositivo mobile. */
+    }
+
+    .hero-image {
+        height: 45rem;
+    }
+}
+
+/* @media é uma regra que será aplicada somente se ocorrer um determinado padrão que está dentro dos parenteses irá então exacutar o que está dentro das chaves. */
+@media (min-width: 1100px) {    /* se a largura estiver de 1100 pra cima então, efetuar */
+    
+    #page-landing #container {
+        max-width: 1100px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 2fr;     /*  fr é fração*/
+        grid-template-rows: 350px 104px;     /* nesse caso o 1fr fica flexivel, vai ocupar todo o restante dos px que sobraram*/
+        grid-template-areas: 
+        "proffy image image"
+        "button button texting";
+        
+        /* gap é vão, abetura */   
+        column-gap: 87px;
+        row-gap: 86px;
+    }
+
+    .logo-container {
+        grid-area: proffy;
+        text-align: initial;
+        align-self: center;     /*diz que todo o conteudo dele mesmo(do grid) já está alinhado ao centro, não deixando o conteúdo escapar do grid*/
+        margin: 0;
+    }
+    
+    .logo-container img {
+        height: 100%;
+    }
+    
+    .hero-image {
+        grid-area: image;
+        height: 350px;
+    }
+    
+    .buttons-container {
+        grid-area: button;
+        justify-content: flex-start;    /* sobscreve o alinhamento ao centro está mais acima caso a tela seja maior ou igual a 1100px de largura para começar no cantinho e não no centro.*/
+        margin: 0;
+    }
+    
+    .total-connections {
+        grid-area: texting;
+        justify-self: end;
+        font-size: 1.2rem;
+    }
+    
+}
+

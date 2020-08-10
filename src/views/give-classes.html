@@ -1,0 +1,149 @@
+<!-- "Ctrl + shift + r = recarregamento forte (sem oq está em cache")." -->
+<!-- "Todo o conteudo visivel deve estar na tag body"-->
+
+
+<!DOCTYPE html>
+<html lang="pt_br">    <!-- lang é um atributo -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proffy | Sua plataforma de estudos online</title>
+
+ 
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/partials/header.css">
+    <link rel="stylesheet" href="/styles/partials/forms.css">
+    <link rel="stylesheet" href="/styles/partials/page-give-classes.css">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+
+    <script src="/scripts/addField.js" defer></script>  <!-- precisa do defer pq ele diz que só vai ler o script quando terminar de ler o HTML -->
+
+</head>
+
+<body id="page-give-classes">
+
+    <div id="container">
+
+        <header class="page-header">
+
+            <div class="top-bar-container">
+                <a href="/">    <!-- É uma barra '/' pq vai ser redirecionado a tela principal. -->
+                    <img src="/images/icons/back.svg" alt="Voltar">     <!-- img de segundo nível do top-bar-container -->
+                </a>
+                <img src="/images/logo.svg" alt="Proffy">       <!-- img de primeiro nível do top-bar-container -->
+            </div>
+            
+
+            <div class="header-content">
+                <strong>Que incrível que você quer dar aulas.</strong>
+                <p>O primeiro passo é preencher esse formulário de inscrição.</p>
+
+            </div>
+        </header>
+
+        <main>          <!-- quer dizer o ponto principal da página.-->
+    
+            <form action="/save-classes" id="create-class" method="POST">    <!-- esse méthod esconde os dados de aparecer na url. O method POST somente formulários e outras estratégias a mais eu consigo acesar a rota POST. Não consigo acessar pela url pq pela url é sempre a rota GET -->
+                <fieldset>      <!-- dentro de um formulário pra gente fazer um agrupamento de dados a gente usa uma tag chamada <fieldset> -->
+                    <legend>Seus dados</legend>        <!-- e toda <fieltset precisa vir com uma <legend>> e esse legend vai ser o nome do agrupamento de dados.-->
+
+                        <div class="input-block">
+                            <label for="name">Nome completo</label>     <!-- para todo label, deixar um for="" pq é uma boa prática do HTML, e o id para ajudar no CSS tbm. -->
+                            <input name="name" id="name" required>      <!-- o formulário não envia todos os dados para o back-end se todos os campos não estiverem preenchidos com o required -->
+                        </div>
+
+                        <div class="input-block">
+                            <label for="avatar">Link da sua foto <small>(comece com https://)</small></label>   <!-- a tag <small> diz que eu tenho um text pequeno, que podemos editar no CSS -->
+                            <input name="avatar" id="avatar" type="url" required>   <!-- o input do tipo url exige que se coloque links no campo. -->
+                        </div>
+
+
+                        <div class="input-block">
+                            <label for="whatsapp">Whatsapp <small>(somente números)</small></label>
+                            <input name="whatsapp" id="whatsapp" type="number" required>    <!-- todos os input(ou tipos de dados) estão levando o atributo name="" para que possamos pegar esses dados no back-end. -->
+                        </div>
+
+                        
+                        <div class="textarea-block">
+                            <label for="bio">Biografia</small></label>
+                            <textarea name="bio" id="bio" required></textarea>      <!-- a tag <textarea> não pode ter quebra de linha pq se tiver o cursor fica doido(não começa no cantinho), textarea serve para um text um pouco maior, tipo um textinho. -->
+                        </div>
+                    
+                </fieldset>
+
+                <fieldset>
+                    <legend>Sobre a aula</legend>
+                    <div class="select-block">
+                        <label for="subject">Matéria</label>
+                        <select name="subject" id="subject" required>
+                            <option value="" disabled="" hidden="">Selecione uma opção</option>
+                            {%for subject in subjects %}
+                                <option value="{{loop.index}}"> 
+                                    {{subject}}
+                                </option>
+                            {%endfor%}
+                        </select>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="cost">Custo da sua hora/aula
+                            <small>(R$)</small>
+                        </label>
+                        <input name="cost" type="cost" id="cost" type="number" required>
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset id="schedule-items">
+                    <legend>Horários disponíveis
+                        <button type="button" id="add-time">+ Novo Horário</button>    <!-- vou precisar desse id="" para estilizar no JS -->
+                    </legend>
+
+                    <div class="schedule-item">
+                        <div class="select-block">
+                            <label for="weekday">Dia da semana</label>
+                            <select name="weekday[]" required>      <!-- esse [] no name="weekday[]" significa que lá no back-end esse weekday pode vir com mais de um valor, então ele vai agrupar pra mim os valores, com essa tecnica.  -->
+                                <option value="">Selecione uma opção</option>
+                                <!-- loop.index0 pra ele começar a contar do 0 -->
+                                {%for weekday in weekdays %}
+                                    <option value="{{loop.index0}}"> 
+                                        {{weekday}}
+                                    </option>
+                                {%endfor%}
+                            </select>     
+                        </div>
+
+                        <div class="input-block">
+                            <label for="time-from">Das</label>       <!-- tirei o id de cima e de baixo pq o id na página tem que ser único e se tivesse aqui, toda vez que o JS adicionasse teria um id duplicado pelo id="weekday" e abaixo pelo id="time_from" e time_to-->
+                            <input type="time" name="time_from[]" required>   <!-- [] pq ele pode ter vários horários que serão agrupados no back-end -->
+                        </div>
+
+
+                        <div class="input-block">
+                            <label for="time-to">Até</label>       
+                            <input type="time" name="time_to[]" required>   
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </form>
+
+            <footer>
+                <p>
+                    <img src="/images/icons/warning.svg" alt="Aviso importante">
+                    Importante! <br> Preencha todos os dados
+                </p>
+                <button type="submit" form="create-class">Salvar cadastro</button>  <!-- toda tag do tipo submit precisa estar dentro do form pra saber que são os dados daquele form q serão enviados, caso não estiver, então colocamos dentro da tag o atributo form="create-class" , onde nesse caso create-class é o nome do id do formulário que eu quero enviar pelo submit. -->
+            </footer>
+
+        </main>
+    </div>
+
+</body>
+
+</html>

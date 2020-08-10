@@ -1,0 +1,76 @@
+/* root: elemento raiz do HTML INTEIRO. */
+:root {
+
+    /* quando eu coloco -- estou def uma variável no CSS */
+
+    --color-background: #FFF9D9;        /*#F0F0F7*/
+    --color-primary-lighter: #F4D58D;
+    --color-primary-light: #E09F3E;
+    --color-primary: #540B0E;
+    --color-primary-dark: #9E2A2B;
+    --color-primary-darker: #E09F3E;
+    --color-secondary: #001427;
+    --color-secondary-dark: #335C67;
+    --color-title-in-primary: #FFFFFF;
+    --color-text-in-primary: #F4D58D;
+    --color-text-title: #32264D;
+    --color-text-complement: #9C98A6;
+    --color-text-base: #6A6180;
+    --color-line-in-white: #E6E6F0;
+    --color-input-background: #F8F8FC;
+    --color-button-text: #FFFFFF;
+    --color-box-base: #FFFFFF;
+    --color-box-footer: #FAFAFC;
+    --color-small-info: #C1BCCC;
+
+    /* tamanho da fonte padrão: 16px - 100% - 1rem */
+
+    font-size: 60%; /* controle das medidas rem */
+                    /* O 'rem' é uma undd de medida relativa ao root. */ 
+                    /* O '%' é relativo ao superior a ele. */
+
+}
+
+/* dizendo para pegar todos os elementos e tirar o margin e o padding que existe no meu HTML, pq sempre vem algum padrão. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* mede a largura a partir da borda da caixa, pq por padrão ele começa a medir do conteudo da caixa. */
+                            /* ele se vira para manter o tamanho da largura invicto. */
+
+}
+
+/* para ocupar toda a visão do documento. */
+html, body {
+    height: 100vh;  
+}
+
+body { 
+    background: var(--color-background);
+    display: flex;  /* muda o fluxo padrão do HTML que é de colocar tudo um embaixo do outro, para ser um ao lado do outro. */
+                    /* Regras fora da caixa (block / inline) */
+    align-items: center;
+    justify-content: center;
+}
+
+body, input, button, textarea {
+    font-weight: 500;
+    font-family: Poppins;
+    font-size: 1.6rem;
+    color: var(--color-text-base);
+}
+
+#container {
+    width: 90vw;            /* (quebra a largura em 100 pedacinhos mas ocupa somente 90)*/
+    max-width: 700px;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+@media (min-width: 700px)
+{
+    :root {
+        font-size: 62.5%;   /* quer dizer que todo 1rem vai ser relativo a 10px*/
+                            /* pq o tamanho da fonte padrão: 16px - 100% - 1rem */
+    }
+}
