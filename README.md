@@ -1,5 +1,5 @@
 # nlw
-Proffy, online study platform. Proffy, plataforma de estudos online.Proffy
+Proffy, online study platform.
 
 Proffy, is an online study platform that I learned to develop during Next level Week II, an event that took place from 3 to 9 August 2020. Some of the tools used in the front-end were JavaScript, HTML, CSS, and the use of @media for responsiveness on different types of screens. And in the back-end NodeJS, Express, Nunjucks, and SQLite.
 
